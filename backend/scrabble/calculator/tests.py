@@ -81,10 +81,9 @@ class ApiTests(APITestCase):
         payload = {
             "name": "basyir",
             "word": "a",
-            "score": "10",
         }
         response = self.client.post(url, payload)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
 class ServiceLogicTests(TestCase):
@@ -95,5 +94,5 @@ class ServiceLogicTests(TestCase):
         create_score_table_entry("k", 9)
 
     def test_calculate_score(self):
-        res = Service.calculate_Score(self, "muzamir", "back", 0)
+        res = Service.calculate_Score(self, "muzamir", "back")
         self.assertEqual(res.get("score"), 27)

@@ -4,7 +4,7 @@ from calculator.models import ScoreTable
 class Service:
 
     @staticmethod
-    def calculate_Score(self, name, word, score):
+    def calculate_Score(self, name, word):
         print("Calculating score")
         list_word = list(word.strip().lower())
 
