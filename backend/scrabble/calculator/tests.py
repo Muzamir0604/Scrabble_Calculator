@@ -1,5 +1,11 @@
 from django.test import TestCase
 from calculator import models
+from django.urls import reverse
+from rest_framework.test import APITestCase
+from rest_framework import status
+
+scoreTableListUrl = reverse('scoretable-list')
+UserEntryListUrl = reverse('userentry-list')
 
 
 def create_entry(name="muzamir", word="Intelligent", score=10):
@@ -46,3 +52,35 @@ class ModelTests(TestCase):
         score_entry = create_score_table_entry()
 
         self.assertEqual(str(score_entry), "A")
+
+
+class ApiTests(APITestCase):
+    def setUp(self):
+        create_score_table_entry()
+        create_entry()
+
+    def test_read_scoretable(self):
+        url = scoreTableListUrl
+
+        response = self.client.get(url, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(models.ScoreTable.objects.count(), 1)
+
+    def test_read_userentry(self):
+        url = UserEntryListUrl
+
+        response = self.client.get(url, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(models.ScoreTable.objects.count(), 1)
+
+    def test_create_userentry(self):
+        url = UserEntryListUrl
+        payload = {
+            "name": "basyir",
+            "word": "awesomepawsome",
+            "score": "43",
+        }
+        response = self.client.post(url, payload)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
