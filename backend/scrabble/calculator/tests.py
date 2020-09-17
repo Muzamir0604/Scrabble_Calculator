@@ -1,5 +1,6 @@
 from django.test import TestCase
 from calculator import models
+from calculator.service import Service
 from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
@@ -45,13 +46,13 @@ class ModelTests(TestCase):
 
         entry = create_entry()
 
-        self.assertEqual(str(entry), "muzamir-Intelligent:10")
+        self.assertEqual(str(entry), "muzamir-intelligent:10")
 
     def test_create_scoretable_entry(self):
         """Test scoretable Entry"""
         score_entry = create_score_table_entry()
 
-        self.assertEqual(str(score_entry), "A")
+        self.assertEqual(str(score_entry), "a")
 
 
 class ApiTests(APITestCase):
@@ -79,8 +80,20 @@ class ApiTests(APITestCase):
         url = UserEntryListUrl
         payload = {
             "name": "basyir",
-            "word": "awesomepawsome",
-            "score": "43",
+            "word": "a",
+            "score": "10",
         }
         response = self.client.post(url, payload)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+
+class ServiceLogicTests(TestCase):
+    def setUp(self):
+        create_score_table_entry("b", 10)
+        create_score_table_entry("c", 5)
+        create_score_table_entry("a", 3)
+        create_score_table_entry("k", 9)
+
+    def test_calculate_score(self):
+        res = Service.calculate_Score(self, "muzamir", "back", 0)
+        self.assertEqual(res.get("score"), 27)

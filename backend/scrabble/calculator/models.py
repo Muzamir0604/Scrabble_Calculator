@@ -14,6 +14,11 @@ class ScoreTable(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
+    def save(self, *args, **kwargs):
+        """save letter in lower case"""
+        self.letter = self.letter.lower()
+        return super(ScoreTable, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.letter
 
@@ -26,6 +31,11 @@ class UserEntry(models.Model):
     score = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+
+    def save(self, *args, **kwargs):
+        """save Word in lower case"""
+        self.word = self.word.lower()
+        return super(UserEntry, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name + "-" + self.word + ":" + str(self.score)
