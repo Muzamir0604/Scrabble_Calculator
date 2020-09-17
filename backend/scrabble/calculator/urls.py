@@ -7,7 +7,7 @@ from django.conf.urls import include
 
 
 router = routers.DefaultRouter()
-router.register('score', ScoreTableViewSet)
+router.register('score-table', ScoreTableViewSet)
 router.register('scrabble', UserEntryViewSet)
 
 urlpatterns = [

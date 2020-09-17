@@ -8,7 +8,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class ScoreTable(models.Model):
     """ScoreTable
     """
-    letter = models.CharField(max_length=1)
+    letter = models.CharField(max_length=1, unique=True)
     value = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(20)])
     created_at = models.DateTimeField(auto_now_add=True, null=True)
