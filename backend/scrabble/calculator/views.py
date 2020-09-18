@@ -1,16 +1,20 @@
 from django.shortcuts import render
 from rest_framework import viewsets, status
 from rest_framework.permissions import AllowAny
+from rest_framework.filters import SearchFilter
 from calculator.models import ScoreTable, UserEntry
 from calculator.serializers import ScoreTableSerializer, UserEntrySerializer
 from rest_framework.response import Response
 from calculator.service import Service
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class UserEntryViewSet(viewsets.ModelViewSet):
     queryset = UserEntry.objects.all()
     serializer_class = UserEntrySerializer
     permission_classes = [AllowAny]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['name']
 
     def create(self, request, *args, **kwargs):
         name = request.data['name']
