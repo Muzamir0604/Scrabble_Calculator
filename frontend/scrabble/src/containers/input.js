@@ -13,11 +13,10 @@ import {
 import { Formik } from "formik";
 import { postUserEntryList } from "../actions/userEntryActions";
 import * as Yup from "yup";
-//TODO: Fix Regex for Case insensitive
 const schema = Yup.object({
   word: Yup.string()
     .required("Required")
-    .matches(/^[abcdefghijklmnopqrstuvwxyz]+$/, "Word must be only letters"),
+    .matches(/^[a-zA-Z]+$/, "Word must be only letters"),
 });
 
 const useStyles = makeStyles({
