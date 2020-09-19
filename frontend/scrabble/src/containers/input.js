@@ -22,23 +22,23 @@ const schema = Yup.object({
 
 const useStyles = makeStyles({
   form: {
-    margin: "1em 2em",
-    padding: "1em 2em",
+    margin: "0em 2em",
+    padding: "0em 2em",
   },
   buttonCancel: {
-    margin: "1em",
+    margin: "1em 1em",
     backgroundColor: "red",
     color: "black",
     fontSize: 24,
   },
   buttonSubmit: {
-    margin: "1em",
+    margin: "1em 1em",
     backgroundColor: "green",
     color: "black",
     fontSize: 24,
   },
   textField: {
-    width: 500,
+    // width: 500,
     margin: 100,
   },
   //style for font size

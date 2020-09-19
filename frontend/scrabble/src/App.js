@@ -32,10 +32,10 @@ function App(props) {
         <Grid item xs={12} className={classes.form}>
           <ScoreCard score={userEntry.score} />
         </Grid>
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={12}>
           <InputForm />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12}>
           <SimpleTable list={list} />
         </Grid>
       </Grid>
