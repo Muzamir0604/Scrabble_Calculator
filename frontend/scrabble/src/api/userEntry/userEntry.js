@@ -10,12 +10,12 @@ export const getUserEntryList = async () => {
   return await axios.get(USER_ENTRY_LIST);
 };
 
-export const postUserEntry = async (data) => {
+export const postUserEntry = async (name, word) => {
   return await axios.post(
     USER_ENTRY_POST,
     {
-      name: data.name,
-      word: data.word,
+      name: name,
+      word: word,
     },
     {
       headers: { "Content-Type": "application/json" },
