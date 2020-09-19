@@ -23,6 +23,8 @@ class UserEntryViewSet(viewsets.ModelViewSet):
 
         UserEntry.objects.create(**data)
         response = {'message': 'Entry Created',
+                    'name': request.data['name'],
+                    'word': request.data['word'],
                     'score': data['score']}
         return Response(response, status=status.HTTP_200_OK)
 
