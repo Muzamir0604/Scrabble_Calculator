@@ -12,9 +12,7 @@ import capitalize from "../utils/textTransformer";
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
-    margin: "2em 12em",
-    maxWidth: "80%",
+    minWidth: 250,
   },
   tableHead: {
     backgroundColor: "#2b8cbe",

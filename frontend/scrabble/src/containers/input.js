@@ -21,31 +21,25 @@ const schema = Yup.object({
 });
 
 const useStyles = makeStyles({
-  form: {
-    margin: "0em 2em",
-    padding: "0em 2em",
-  },
   buttonCancel: {
-    margin: "1em 1em",
     backgroundColor: "red",
     color: "black",
     fontSize: 24,
   },
   buttonSubmit: {
-    margin: "1em 1em",
+    margin: "0.5em 0.5em",
     backgroundColor: "green",
     color: "black",
     fontSize: 24,
   },
   buttonSummary: {
-    margin: "1em 1em",
+    margin: "0.5em 0.5em",
     backgroundColor: "blue",
     color: "black",
     fontSize: 24,
   },
   textField: {
-    // width: 500,
-    margin: 100,
+    margin: 50,
   },
   //style for font size
   resize: {
@@ -71,7 +65,7 @@ function InputForm(props) {
       >
         {(props) => (
           <form onSubmit={props.handleSubmit}>
-            <FormGroup className={classes.form}>
+            <FormGroup>
               <FormControl>
                 <TextField
                   name="word"

@@ -13,6 +13,10 @@ const useStyles = makeStyles({
   form: {
     padding: "4em 4em",
   },
+  table: {
+    margin: "0.5em 0.5em",
+    padding: "0.5em 0.5em",
+  },
 });
 
 function App(props) {
@@ -35,11 +39,11 @@ function App(props) {
         <Grid item xs={12} className={classes.form}>
           <ScoreCard score={userEntry.score} />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} className={classes.table}>
           <InputForm handleSummary={handleSummary} />
         </Grid>
         {isSummary ? (
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12}>
             <SimpleTable list={list} />
           </Grid>
         ) : null}
