@@ -37,6 +37,12 @@ const useStyles = makeStyles({
     color: "black",
     fontSize: 24,
   },
+  buttonSummary: {
+    margin: "1em 1em",
+    backgroundColor: "blue",
+    color: "black",
+    fontSize: 24,
+  },
   textField: {
     // width: 500,
     margin: 100,
@@ -46,7 +52,8 @@ const useStyles = makeStyles({
     fontSize: 50,
   },
 });
-function InputForm() {
+function InputForm(props) {
+  const func_props = props;
   const dispatch = useDispatch();
   const classes = useStyles();
   let name = "muzamir";
@@ -99,6 +106,13 @@ function InputForm() {
               onClick={props.handleReset}
             >
               Clear
+            </Button>
+            <Button
+              color="secondary"
+              className={classes.buttonSummary}
+              onClick={func_props.handleSummary}
+            >
+              View All
             </Button>
           </form>
         )}

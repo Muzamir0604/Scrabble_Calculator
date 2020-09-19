@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserEntryList } from "./actions/userEntryActions";
 
@@ -19,7 +19,10 @@ function App(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const userEntry = useSelector((state) => state.userEntryReducer);
-
+  const [isSummary, setIsSummary] = useState(false);
+  function handleSummary() {
+    setIsSummary(!isSummary);
+  }
   useEffect(() => {
     dispatch(fetchUserEntryList());
     // eslint-disable-next-line
@@ -33,11 +36,13 @@ function App(props) {
           <ScoreCard score={userEntry.score} />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <InputForm />
+          <InputForm handleSummary={handleSummary} />
         </Grid>
-        <Grid item xs={12} sm={12}>
-          <SimpleTable list={list} />
-        </Grid>
+        {isSummary ? (
+          <Grid item xs={12} sm={12}>
+            <SimpleTable list={list} />
+          </Grid>
+        ) : null}
       </Grid>
     </div>
   );
