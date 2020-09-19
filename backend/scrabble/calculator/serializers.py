@@ -10,8 +10,8 @@ from calculator.models import ScoreTable, UserEntry
 class UserEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = UserEntry
-        exclude = ('created_at', 'updated_at')
-        read_only_fields = ('id', 'score')
+        exclude = ('updated_at',)
+        read_only_fields = ('id', 'score', 'created_at')
 
     def create(self, validated_data):
         logic = Service.calculate_Score(self, **validated_data)

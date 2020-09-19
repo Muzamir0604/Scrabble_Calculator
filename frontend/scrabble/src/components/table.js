@@ -28,6 +28,16 @@ export default function SimpleTable(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  var options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    seconds: "numeric",
+  };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -69,6 +79,12 @@ export default function SimpleTable(props) {
                   <TableCell>{list.name}</TableCell>
                   <TableCell>{list.word}</TableCell>
                   <TableCell>{list.score}</TableCell>
+                  <TableCell>
+                    {new Date(list.created_at).toLocaleDateString(
+                      "en-US",
+                      options
+                    )}
+                  </TableCell>
                 </TableRow>
               ))}
           </TableBody>
