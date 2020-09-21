@@ -13,8 +13,11 @@ import {
 import { Formik } from "formik";
 import { postUserEntryList } from "../actions/userEntryActions";
 import * as Yup from "yup";
+import Tile from "../components/tile";
+
 const schema = Yup.object({
   word: Yup.string()
+    .max(7, "Maximum 7 letters")
     .required("Required")
     .matches(/^[a-zA-Z]+$/, "Word must be only letters"),
 });
@@ -63,51 +66,54 @@ function InputForm(props) {
         }}
       >
         {(props) => (
-          <form onSubmit={props.handleSubmit}>
-            <FormGroup>
-              <FormControl>
-                <TextField
-                  name="word"
-                  type="text"
-                  value={props.values.word}
-                  onChange={props.handleChange}
-                  onBlur={props.handleBlur}
-                  placeholder="key in your word"
-                  InputProps={{ classes: { input: classes.resize } }}
-                  className={classes.textField}
-                />
-              </FormControl>
-              {props.touched.word && props.errors.word ? (
-                <FormHelperText
-                  id="component-error-text"
-                  style={{ color: "red" }}
-                >
-                  {props.errors.word}
-                </FormHelperText>
-              ) : null}
-            </FormGroup>
-            <Button
-              color="primary"
-              type="submit"
-              className={classes.buttonSubmit}
-            >
-              Submit
-            </Button>
-            <Button
-              color="secondary"
-              className={classes.buttonCancel}
-              onClick={props.handleReset}
-            >
-              Clear
-            </Button>
-            <Button
-              color="secondary"
-              className={classes.buttonSummary}
-              onClick={func_props.handleSummary}
-            >
-              View All
-            </Button>
-          </form>
+          <React.Fragment>
+            <Tile word={props.values.word} count={7} />
+            <form onSubmit={props.handleSubmit}>
+              <FormGroup>
+                <FormControl>
+                  <TextField
+                    name="word"
+                    type="text"
+                    value={props.values.word}
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    placeholder="key in your word"
+                    InputProps={{ classes: { input: classes.resize } }}
+                    className={classes.textField}
+                  />
+                </FormControl>
+                {props.touched.word && props.errors.word ? (
+                  <FormHelperText
+                    id="component-error-text"
+                    style={{ color: "red" }}
+                  >
+                    {props.errors.word}
+                  </FormHelperText>
+                ) : null}
+              </FormGroup>
+              <Button
+                color="primary"
+                type="submit"
+                className={classes.buttonSubmit}
+              >
+                Submit
+              </Button>
+              <Button
+                color="secondary"
+                className={classes.buttonCancel}
+                onClick={props.handleReset}
+              >
+                Clear
+              </Button>
+              <Button
+                color="secondary"
+                className={classes.buttonSummary}
+                onClick={func_props.handleSummary}
+              >
+                View All
+              </Button>
+            </form>
+          </React.Fragment>
         )}
       </Formik>
     </React.Fragment>

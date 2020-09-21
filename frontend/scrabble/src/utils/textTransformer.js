@@ -1,3 +1,7 @@
 export default function capitalize(word) {
-  return word[0].toUpperCase() + word.slice(1).toLowerCase();
+  if (word !== undefined) {
+    return word[0].toUpperCase() + word.slice(1).toLowerCase();
+  } else {
+    return null;
+  }
 }
