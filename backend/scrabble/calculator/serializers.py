@@ -21,4 +21,9 @@ class UserEntrySerializer(serializers.ModelSerializer):
 class ScoreTableSerializer(serializers.ModelSerializer):
     class Meta:
         model = ScoreTable
-        exclude = ('created_at', 'updated_at')
+        exclude = ('id', 'created_at', 'updated_at')
+
+    def to_representation(self, instance):
+        data = super(ScoreTableSerializer, self).to_representation(instance)
+        """Modify your response data here"""
+        return dict(data)

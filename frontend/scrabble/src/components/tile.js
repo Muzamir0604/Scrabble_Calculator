@@ -2,6 +2,9 @@ import React from "react";
 import { Box, Typography, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import capitalize from "../utils/textTransformer";
+import dictTransformer from "../utils/dictTransformer";
+import { useSelector } from "react-redux";
+
 const useStyles = makeStyles({
   box: {
     borderStyle: "dotted",
@@ -22,17 +25,13 @@ const useStyles = makeStyles({
 });
 function Tile(props) {
   const classes = useStyles();
-  const txt = "123";
+  const scoreList = useSelector((state) => state.scoreTableReducer.list);
+  var dict = dictTransformer(scoreList);
+  console.log(dict["a"]);
 
   return (
     <React.Fragment>
-      <Grid
-        container
-        className={classes.grid}
-        // alignContent="center"
-        // alignItems="center"
-        justify="center"
-      >
+      <Grid container className={classes.grid} justify="center">
         {[...Array(props.count)].map((val, key) => {
           return (
             <Grid item>
@@ -46,8 +45,8 @@ function Tile(props) {
                 </Typography>
                 <Typography className={classes.sub}>
                   {props.word !== undefined
-                    ? txt !== null
-                      ? capitalize(txt)
+                    ? capitalize(props.word[key]) !== null
+                      ? dict[props.word[key]]
                       : null
                     : null}
                 </Typography>

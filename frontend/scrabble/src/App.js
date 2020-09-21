@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserEntryList } from "./actions/userEntryActions";
-
+import { fetchScoreTableList } from "./actions/scoreTableActions";
 import ScoreCard from "./components/score";
 import InputForm from "./containers/input";
 import SimpleTable from "./components/table";
@@ -29,6 +29,7 @@ function App(props) {
   }
   useEffect(() => {
     dispatch(fetchUserEntryList());
+    dispatch(fetchScoreTableList());
     // eslint-disable-next-line
   }, [userEntry.score]);
   const list = useSelector((state) => state.userEntryReducer.list);

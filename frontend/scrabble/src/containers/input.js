@@ -3,18 +3,15 @@ import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   FormControl,
-  Input,
   FormHelperText,
   FormGroup,
   Button,
   TextField,
 } from "@material-ui/core";
-// import Alert from "@material-ui/lab/Alert";
 import { Formik } from "formik";
 import { postUserEntryList } from "../actions/userEntryActions";
 import * as Yup from "yup";
 import Tile from "../components/tile";
-
 const schema = Yup.object({
   word: Yup.string()
     .max(7, "Maximum 7 letters")
@@ -43,7 +40,6 @@ const useStyles = makeStyles({
   textField: {
     margin: 50,
   },
-  //style for font size
   resize: {
     fontSize: 50,
   },
