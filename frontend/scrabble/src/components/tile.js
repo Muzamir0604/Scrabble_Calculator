@@ -46,7 +46,7 @@ function Tile(props) {
                 <Typography className={classes.sub}>
                   {props.word !== undefined
                     ? capitalize(props.word[key]) !== null
-                      ? dict[props.word[key]]
+                      ? dict[props.word[key].toLowerCase()]
                       : null
                     : null}
                 </Typography>
