@@ -12,9 +12,11 @@ import { Formik } from "formik";
 import { postUserEntryList } from "../actions/userEntryActions";
 import * as Yup from "yup";
 import Tile from "../components/tile";
+import MaskedInput from "react-text-mask";
+const tileCount = 10;
 const schema = Yup.object({
   word: Yup.string()
-    .max(7, "Maximum 7 letters")
+    .max(tileCount, "Maximum " + tileCount + " letters")
     .required("Required")
     .matches(/^[a-zA-Z]+$/, "Word must be only letters"),
 });
@@ -63,6 +65,26 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: { fontSize: 50 },
   },
 }));
+function TextMaskCustom(props) {
+  const { inputRef, ...other } = props;
+  var maskInput = [];
+  for (var i = 1; i <= tileCount; i++) {
+    maskInput.push(/[a-zA-Z]/);
+  }
+
+  return (
+    <MaskedInput
+      {...other}
+      ref={(ref) => {
+        inputRef(ref ? ref.inputElement : null);
+      }}
+      mask={maskInput}
+      placeholderChar={"\u2000"}
+      showMask
+    />
+  );
+}
+
 function InputForm(props) {
   const func_props = props;
   const dispatch = useDispatch();
@@ -71,7 +93,7 @@ function InputForm(props) {
   return (
     <React.Fragment>
       <Formik
-        initialValues={{ word: "bob" }}
+        initialValues={{ word: "" }}
         validationSchema={schema}
         onSubmit={(values, actions) => {
           setTimeout(() => {
@@ -82,7 +104,7 @@ function InputForm(props) {
       >
         {(props) => (
           <React.Fragment>
-            <Tile word={props.values.word} count={10} />
+            <Tile word={props.values.word} count={tileCount} />
             <form onSubmit={props.handleSubmit}>
               <FormGroup>
                 <FormControl>
@@ -93,7 +115,10 @@ function InputForm(props) {
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
                     placeholder="key in your word"
-                    InputProps={{ classes: { input: classes.resize } }}
+                    InputProps={{
+                      classes: { input: classes.resize },
+                      inputComponent: TextMaskCustom,
+                    }}
                     className={classes.textField}
                   />
                 </FormControl>

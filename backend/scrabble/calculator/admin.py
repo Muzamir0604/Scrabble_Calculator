@@ -5,5 +5,10 @@ from django.contrib import admin
 from calculator.models import UserEntry, ScoreTable
 
 
+class ScoreTableAdmin(admin.ModelAdmin):
+    model = ScoreTable
+    ordering = ('letter',)
+
+
 admin.site.register(UserEntry)
-admin.site.register(ScoreTable)
+admin.site.register(ScoreTable, ScoreTableAdmin)
