@@ -52,7 +52,7 @@ function InputForm(props) {
   return (
     <React.Fragment>
       <Formik
-        initialValues={{ word: "" }}
+        initialValues={{ word: "bob" }}
         validationSchema={schema}
         onSubmit={(values, actions) => {
           setTimeout(() => {
@@ -63,7 +63,7 @@ function InputForm(props) {
       >
         {(props) => (
           <React.Fragment>
-            <Tile word={props.values.word} count={7} />
+            <Tile word={props.values.word} count={10} />
             <form onSubmit={props.handleSubmit}>
               <FormGroup>
                 <FormControl>

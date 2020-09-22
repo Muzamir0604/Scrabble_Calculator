@@ -5,24 +5,53 @@ import capitalize from "../utils/textTransformer";
 import dictTransformer from "../utils/dictTransformer";
 import { useSelector } from "react-redux";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   box: {
     borderStyle: "dotted",
     backgroundColor: "transparent",
-    width: "100px",
-    height: "100px",
-    margin: "0.25em",
     alignItems: "centre",
     justifyItems: "centre",
+
+    [theme.breakpoints.only("xs")]: {
+      width: "28px",
+      height: "40px",
+      margin: "0.25em",
+    },
+    [theme.breakpoints.only("sm")]: {
+      width: "50px",
+      height: "50px",
+      margin: "0.25em",
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "100px",
+      height: "100px",
+      margin: "0.25em",
+    },
   },
   grid: {},
-  type: { fontSize: "58px" },
-  sub: {
-    fontSize: "16px",
-    textAlign: "right",
-    margin: "-1em 0.5em",
+  type: {
+    [theme.breakpoints.only("xs")]: { fontSize: "24px" },
+    [theme.breakpoints.only("sm")]: { fontSize: "28px" },
+    [theme.breakpoints.up("md")]: { fontSize: "58px" },
   },
-});
+  sub: {
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "10px",
+      textAlign: "right",
+      margin: "-1.25em 0.25em",
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "10px",
+      textAlign: "right",
+      margin: "-1.25em 0.7em",
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: "16px",
+      textAlign: "right",
+      margin: "-1em 0.75em",
+    },
+  },
+}));
 function Tile(props) {
   const classes = useStyles();
   const scoreList = useSelector((state) => state.scoreTableReducer.list);
