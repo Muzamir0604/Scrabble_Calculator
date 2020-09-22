@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -8,11 +8,13 @@ import {
   Button,
   TextField,
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 import { Formik } from "formik";
 import { postUserEntryList } from "../actions/userEntryActions";
 import * as Yup from "yup";
 import Tile from "../components/tile";
 import MaskedInput from "react-text-mask";
+
 const tileCount = 10;
 const schema = Yup.object({
   word: Yup.string()
@@ -57,6 +59,23 @@ const useStyles = makeStyles((theme) => ({
       justify: "center",
     },
   },
+  alert: {
+    [theme.breakpoints.only("xs")]: {
+      margin: "1em 10em",
+      justify: "center",
+      height: "2em",
+    },
+    [theme.breakpoints.down("sm")]: {
+      margin: "1em 10em",
+      justify: "center",
+      height: "2em",
+    },
+    [theme.breakpoints.up("md")]: {
+      margin: "1em 10em",
+      justify: "center",
+      height: "2em",
+    },
+  },
   resize: {
     textAlign: "center",
     [theme.breakpoints.only("xs")]: { fontSize: 30 },
@@ -87,7 +106,10 @@ function TextMaskCustom(props) {
 function InputForm(props) {
   const func_props = props;
   const dispatch = useDispatch();
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
   const classes = useStyles();
+  useEffect(() => {}, [isSubmit, isEmpty]);
   let name = "muzamir";
   return (
     <React.Fragment>
@@ -95,14 +117,38 @@ function InputForm(props) {
         initialValues={{ word: "" }}
         validationSchema={schema}
         onSubmit={(values, actions) => {
-          setTimeout(() => {
-            dispatch(postUserEntryList(name, values.word));
-            actions.setSubmitting(false);
-          }, 1000);
+          if (values.word.trim()) {
+            setTimeout(() => {
+              setIsEmpty(false);
+              setIsSubmit(true);
+              dispatch(postUserEntryList(name, values.word.trim()));
+              actions.setSubmitting(false);
+            }, 1000);
+            setTimeout(() => {
+              setIsSubmit(false);
+            }, 5000);
+          } else {
+            setTimeout(() => {
+              setIsEmpty(true);
+            }, 500);
+            setTimeout(() => {
+              setIsEmpty(false);
+            }, 3000);
+          }
         }}
       >
         {(props) => (
           <React.Fragment>
+            <div className={classes.alert}>
+              {isSubmit ? (
+                <Alert severity="success">
+                  Submitted — {props.values.word.trim()}!
+                </Alert>
+              ) : null}
+              {isEmpty ? (
+                <Alert severity="error">Error — Empty tiles!</Alert>
+              ) : null}
+            </div>
             <Tile word={props.values.word} count={tileCount} />
             <form onSubmit={props.handleSubmit}>
               <FormGroup>
@@ -125,6 +171,7 @@ function InputForm(props) {
                   <FormHelperText
                     id="component-error-text"
                     style={{ color: "red" }}
+                    className={classes.textField}
                   >
                     {props.errors.word}
                   </FormHelperText>
