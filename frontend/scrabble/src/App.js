@@ -35,6 +35,7 @@ function App(props) {
   const classes = useStyles();
   const userEntry = useSelector((state) => state.userEntryReducer);
   const [isSummary, setIsSummary] = useState(false);
+  const [isScore, setIsScore] = useState(true);
   function handleSummary() {
     setIsSummary(!isSummary);
   }
@@ -49,10 +50,10 @@ function App(props) {
     <div className="App">
       <Grid container>
         <Grid item xs={12} className={classes.form}>
-          <ScoreCard score={userEntry.score} />
+          <ScoreCard score={isScore ? userEntry.score : 0} />
         </Grid>
         <Grid item xs={12} className={classes.table}>
-          <InputForm handleSummary={handleSummary} />
+          <InputForm handleSummary={handleSummary} setIsScore={setIsScore} />
         </Grid>
         {isSummary ? (
           <Grid item xs={12} className={classes.table}>

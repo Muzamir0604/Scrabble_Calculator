@@ -119,6 +119,7 @@ function InputForm(props) {
         onSubmit={(values, actions) => {
           if (values.word.trim()) {
             setTimeout(() => {
+              func_props.setIsScore(true);
               setIsEmpty(false);
               setIsSubmit(true);
               dispatch(postUserEntryList(name, values.word.trim()));
@@ -187,7 +188,10 @@ function InputForm(props) {
               <Button
                 color="secondary"
                 className={classes.buttonCancel}
-                onClick={props.handleReset}
+                onClick={() => {
+                  props.handleReset();
+                  func_props.setIsScore(false);
+                }}
               >
                 Clear
               </Button>
