@@ -68,7 +68,7 @@ export default function SimpleTable(props) {
                   <React.Fragment>
                     {header !== "id" ? (
                       header !== "name" ? (
-                        <StyledTableCell align="center" key={key}>
+                        <StyledTableCell key={key} align="center" key={key}>
                           {capitalize(header)}
                         </StyledTableCell>
                       ) : null

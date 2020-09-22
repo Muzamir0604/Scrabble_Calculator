@@ -56,14 +56,13 @@ function Tile(props) {
   const classes = useStyles();
   const scoreList = useSelector((state) => state.scoreTableReducer.list);
   var dict = dictTransformer(scoreList);
-  console.log(dict["a"]);
 
   return (
     <React.Fragment>
       <Grid container className={classes.grid} justify="center">
         {[...Array(props.count)].map((val, key) => {
           return (
-            <Grid item>
+            <Grid item key={key}>
               <Box key={key} className={classes.box}>
                 <Typography className={classes.type}>
                   {props.word !== undefined

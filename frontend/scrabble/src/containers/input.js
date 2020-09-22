@@ -17,8 +17,7 @@ const tileCount = 10;
 const schema = Yup.object({
   word: Yup.string()
     .max(tileCount, "Maximum " + tileCount + " letters")
-    .required("Required")
-    .matches(/^[a-zA-Z]+$/, "Word must be only letters"),
+    .required("Required"),
 });
 
 const useStyles = makeStyles((theme) => ({
