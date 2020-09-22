@@ -19,31 +19,50 @@ const schema = Yup.object({
     .matches(/^[a-zA-Z]+$/, "Word must be only letters"),
 });
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   buttonCancel: {
     backgroundColor: "red",
     color: "black",
-    fontSize: 24,
+    [theme.breakpoints.only("xs")]: { fontSize: 12 },
+    [theme.breakpoints.only("sm")]: { fontSize: 18 },
+    [theme.breakpoints.up("md")]: { fontSize: 24 },
   },
+
   buttonSubmit: {
     margin: "0.5em 0.5em",
     backgroundColor: "green",
     color: "black",
-    fontSize: 24,
+    [theme.breakpoints.only("xs")]: { fontSize: 12 },
+    [theme.breakpoints.only("sm")]: { fontSize: 18 },
+    [theme.breakpoints.up("md")]: { fontSize: 24 },
   },
   buttonSummary: {
     margin: "0.5em 0.5em",
     backgroundColor: "blue",
     color: "black",
-    fontSize: 24,
+    [theme.breakpoints.only("xs")]: { fontSize: 12 },
+    [theme.breakpoints.only("sm")]: { fontSize: 18 },
+    [theme.breakpoints.up("md")]: { fontSize: 24 },
   },
   textField: {
-    margin: 50,
+    [theme.breakpoints.only("xs")]: {
+      justify: "center",
+    },
+    [theme.breakpoints.down("sm")]: {
+      justify: "center",
+    },
+    [theme.breakpoints.up("md")]: {
+      margin: "2em 10em",
+      justify: "center",
+    },
   },
   resize: {
-    fontSize: 50,
+    textAlign: "center",
+    [theme.breakpoints.only("xs")]: { fontSize: 30 },
+    [theme.breakpoints.only("sm")]: { fontSize: 40 },
+    [theme.breakpoints.up("md")]: { fontSize: 50 },
   },
-});
+}));
 function InputForm(props) {
   const func_props = props;
   const dispatch = useDispatch();
