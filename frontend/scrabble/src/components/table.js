@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -10,17 +10,23 @@ import Paper from "@material-ui/core/Paper";
 import TablePagination from "@material-ui/core/TablePagination";
 import capitalize from "../utils/textTransformer";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 250,
   },
-  tableHead: {
-    backgroundColor: "#2b8cbe",
+}));
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    // backgroundColor: theme.palette.common.black,
+    backgroundColor: "#193684",
+    color: theme.palette.common.white,
+    fontWeight: "bold",
   },
-  tableBody: {
+  body: {
+    fontSize: 14,
     backgroundColor: "#f0f0f0",
   },
-});
+}))(TableCell);
 
 export default function SimpleTable(props) {
   const classes = useStyles();
@@ -55,34 +61,38 @@ export default function SimpleTable(props) {
     <React.Fragment>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="a densed table">
-          <TableHead className={classes.tableHead}>
+          <TableHead>
             <TableRow>
               {arr.map((header, key) => {
                 return (
                   <React.Fragment>
-                    <TableCell key={key}>{capitalize(header)}</TableCell>
+                    {header !== "id" ? (
+                      header !== "name" ? (
+                        <StyledTableCell align="center" key={key}>
+                          {capitalize(header)}
+                        </StyledTableCell>
+                      ) : null
+                    ) : null}
                   </React.Fragment>
                 );
               })}
             </TableRow>
           </TableHead>
-          <TableBody className={classes.tableBody}>
+          <TableBody>
             {props.list
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((list, key) => (
                 <TableRow key={list.id}>
-                  <TableCell component="th" scope="row">
-                    {key}
-                  </TableCell>
-                  <TableCell>{list.name}</TableCell>
-                  <TableCell>{list.word}</TableCell>
-                  <TableCell>{list.score}</TableCell>
-                  <TableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {list.word}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">{list.score}</StyledTableCell>
+                  <StyledTableCell align="center">
                     {new Date(list.created_at).toLocaleDateString(
                       "en-US",
                       options
                     )}
-                  </TableCell>
+                  </StyledTableCell>
                 </TableRow>
               ))}
           </TableBody>
