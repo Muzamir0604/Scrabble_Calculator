@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets, status
 from rest_framework.permissions import AllowAny
-from rest_framework.filters import SearchFilter
+from rest_framework.filters import SearchFilter, OrderingFilter
+
 from calculator.models import ScoreTable, UserEntry
 from calculator.serializers import ScoreTableSerializer, UserEntrySerializer
 from rest_framework.response import Response
@@ -13,7 +14,9 @@ class UserEntryViewSet(viewsets.ModelViewSet):
     queryset = UserEntry.objects.all()
     serializer_class = UserEntrySerializer
     permission_classes = [AllowAny]
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    ordering_fields = ['created_at']
+    ordering = ['-created_at']
     filterset_fields = ['name']
 
     def create(self, request, *args, **kwargs):
