@@ -9,15 +9,26 @@ import SimpleTable from "./components/table";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import "./App.css";
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   form: {
-    padding: "4em 4em",
+    [theme.breakpoints.down("sm")]: {
+      padding: "2em 0.5em",
+    },
+    [theme.breakpoints.up("md")]: {
+      padding: "4em 4em",
+    },
   },
   table: {
-    margin: "0.5em 0.5em",
-    padding: "0.5em 0.5em",
+    [theme.breakpoints.down("sm")]: {
+      margin: "0.5em 0.5em",
+      padding: "0.5em 0.5em",
+    },
+    [theme.breakpoints.up("md")]: {
+      margin: "0.5em 4em",
+      padding: "0.5em 4em",
+    },
   },
-});
+}));
 
 function App(props) {
   const dispatch = useDispatch();
@@ -44,7 +55,7 @@ function App(props) {
           <InputForm handleSummary={handleSummary} />
         </Grid>
         {isSummary ? (
-          <Grid item xs={12}>
+          <Grid item xs={12} className={classes.table}>
             <SimpleTable list={list} />
           </Grid>
         ) : null}
