@@ -21,7 +21,7 @@ const schema = Yup.object({
 
 const useStyles = makeStyles((theme) => ({
   buttonCancel: {
-    backgroundColor: "red",
+    backgroundColor: "#dc143c",
     color: "black",
     [theme.breakpoints.only("xs")]: { fontSize: 12 },
     [theme.breakpoints.only("sm")]: { fontSize: 18 },
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
   buttonSubmit: {
     margin: "0.5em 0.5em",
-    backgroundColor: "green",
+    backgroundColor: "#a0be9f",
     color: "black",
     [theme.breakpoints.only("xs")]: { fontSize: 12 },
     [theme.breakpoints.only("sm")]: { fontSize: 18 },
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonSummary: {
     margin: "0.5em 0.5em",
-    backgroundColor: "blue",
+    backgroundColor: "#3A86B7",
     color: "black",
     [theme.breakpoints.only("xs")]: { fontSize: 12 },
     [theme.breakpoints.only("sm")]: { fontSize: 18 },
