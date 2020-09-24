@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TablePagination from "@material-ui/core/TablePagination";
 import capitalize from "../utils/textTransformer";
+import options from "../utils/dateOption";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -17,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    // backgroundColor: theme.palette.common.black,
     backgroundColor: "#193684",
     color: theme.palette.common.white,
     fontWeight: "bold",
@@ -32,15 +32,6 @@ export default function SimpleTable(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  var options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    seconds: "numeric",
-  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
