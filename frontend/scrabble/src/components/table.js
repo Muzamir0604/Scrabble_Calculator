@@ -50,16 +50,20 @@ export default function SimpleTable(props) {
 
   return (
     <React.Fragment>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} data-test="table-container">
         <Table className={classes.table} aria-label="a densed table">
           <TableHead>
             <TableRow>
               {arr.map((header, key) => {
                 return (
-                  <React.Fragment>
+                  <React.Fragment key={key}>
                     {header !== "id" ? (
                       header !== "name" ? (
-                        <StyledTableCell align="center" key={key}>
+                        <StyledTableCell
+                          data-test="styled-header"
+                          align="center"
+                          key={key}
+                        >
                           {capitalize(header)}
                         </StyledTableCell>
                       ) : null
@@ -73,7 +77,7 @@ export default function SimpleTable(props) {
             {props.list
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((list, key) => (
-                <TableRow key={list.id}>
+                <TableRow key={list.id} data-test="table-row">
                   <StyledTableCell align="center" component="th" scope="row">
                     {list.word}
                   </StyledTableCell>
