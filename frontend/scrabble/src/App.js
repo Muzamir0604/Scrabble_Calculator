@@ -9,6 +9,7 @@ import SimpleTable from "./components/table";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import "./App.css";
+
 const useStyles = makeStyles((theme) => ({
   form: {
     [theme.breakpoints.down("sm")]: {
@@ -41,13 +42,12 @@ function App(props) {
   }
   useEffect(() => {
     dispatch(fetchUserEntryList());
-    dispatch(fetchScoreTableList());
     // eslint-disable-next-line
   }, [userEntry.score]);
-  const list = useSelector((state) => state.userEntryReducer.list);
+  const list = userEntry.list;
 
   return (
-    <div className="App">
+    <div className="App" data-test="test-app">
       <Grid container>
         <Grid item xs={12} className={classes.form}>
           <ScoreCard score={isScore ? userEntry.score : 0} />
