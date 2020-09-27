@@ -109,7 +109,7 @@ function InputForm(props) {
   const [isSubmit, setIsSubmit] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
   const classes = useStyles();
-  useEffect(() => {}, [isSubmit, isEmpty]);
+  // useEffect(() => {}, [isSubmit, isEmpty]);
   let name = "muzamir";
   return (
     <React.Fragment>
@@ -150,7 +150,7 @@ function InputForm(props) {
                 <Alert severity="error">Error — Empty tiles!</Alert>
               ) : null}
             </div>
-            <Tile word={props.values.word} count={tileCount} />
+            <Tile data-test="tile" word={props.values.word} count={tileCount} />
             <form onSubmit={props.handleSubmit}>
               <FormGroup>
                 <FormControl>
@@ -179,6 +179,7 @@ function InputForm(props) {
                 ) : null}
               </FormGroup>
               <Button
+                data-test="button-submit"
                 color="primary"
                 type="submit"
                 className={classes.buttonSubmit}
