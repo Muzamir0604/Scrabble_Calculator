@@ -59,7 +59,12 @@ function Tile(props) {
 
   return (
     <React.Fragment>
-      <Grid container className={classes.grid} justify="center">
+      <Grid
+        data-test="tile-section"
+        container
+        className={classes.grid}
+        justify="center"
+      >
         {[...Array(props.count)].map((val, key) => {
           return (
             <Grid item key={key}>
