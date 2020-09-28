@@ -23,7 +23,6 @@ export const postUserEntryList = (name, word) => (dispatch) => {
       dispatch(postUserEntryListSuccess(response.data));
     })
     .catch((error) => {
-      console.log("error", error);
       const errorMessage = apiErrorHandler(error);
       dispatch(postUserEntryListFailure(errorMessage));
     });
