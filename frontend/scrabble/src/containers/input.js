@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   FormControl,
@@ -109,6 +109,7 @@ function InputForm(props) {
   const [isSubmit, setIsSubmit] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
   const classes = useStyles();
+
   // useEffect(() => {}, [isSubmit, isEmpty]);
   let name = "muzamir";
   return (
@@ -150,7 +151,12 @@ function InputForm(props) {
                 <Alert severity="error">Error — Empty tiles!</Alert>
               ) : null}
             </div>
-            <Tile data-test="tile" word={props.values.word} count={tileCount} />
+            <Tile
+              data-test="tile"
+              word={props.values.word}
+              count={tileCount}
+              scoreList={func_props.scoreList}
+            />
             <form onSubmit={props.handleSubmit}>
               <FormGroup>
                 <FormControl>
@@ -198,6 +204,7 @@ function InputForm(props) {
               </Button>
               <Button
                 color="secondary"
+                data-test="view-all"
                 className={classes.buttonSummary}
                 onClick={func_props.handleSummary}
               >

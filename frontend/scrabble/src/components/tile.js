@@ -54,7 +54,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Tile(props) {
   const classes = useStyles();
-  const scoreList = useSelector((state) => state.scoreTableReducer.list);
+  // const scoreList = useSelector((state) => state.scoreTableReducer.list);
+  const scoreList = props.scoreList;
   var dict = dictTransformer(scoreList);
 
   return (
