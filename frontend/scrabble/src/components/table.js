@@ -52,7 +52,7 @@ export default function SimpleTable(props) {
     <React.Fragment>
       <TableContainer component={Paper} data-test="table-container">
         <Table className={classes.table} aria-label="a densed table">
-          <TableHead>
+          <TableHead data-test="table-head">
             <TableRow>
               {arr.map((header, key) => {
                 return (
@@ -60,9 +60,9 @@ export default function SimpleTable(props) {
                     {header !== "id" ? (
                       header !== "name" ? (
                         <StyledTableCell
-                          data-test="styled-header"
                           align="center"
                           key={key}
+                          data-test="table-column"
                         >
                           {capitalize(header)}
                         </StyledTableCell>
@@ -73,7 +73,7 @@ export default function SimpleTable(props) {
               })}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody data-test="table-body">
             {props.list
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((list, key) => (

@@ -7,22 +7,17 @@ import configureMockStore from "redux-mock-store";
 import { middlewares } from "../store";
 import ReduxProvider from "../utils/reduxWrapper";
 
-const mockStore = configureMockStore([...middlewares]);
+// const mockStore = configureMockStore([...middlewares]);
 
-const defaultProps = { count: 10, word: ["hello", "there"] };
+const defaultProps = {
+  count: 10,
+  word: ["hello", "there"],
+  scoreList: [{ letter: "hello", value: "10" }],
+};
 
 const setup = (props = {}) => {
-  const store = mockStore({
-    scoreTableReducer: {
-      list: [{ letter: "hello", value: "10" }],
-    },
-  });
   const setupProps = { ...defaultProps, ...props };
-  const wrapper = mount(
-    <ReduxProvider reduxStore={store}>
-      <Tile {...setupProps} />
-    </ReduxProvider>
-  );
+  const wrapper = shallow(<Tile {...setupProps} />);
   return wrapper;
 };
 
@@ -30,7 +25,7 @@ describe("Tile Component", () => {
   test("renders section without error", () => {
     const wrapper = setup();
     const component = findByTestAttr(wrapper, "tile-section");
-    //not sure why it re-renders thrice
-    expect(component.length).toBe(3);
+
+    expect(component.length).toBe(1);
   });
 });

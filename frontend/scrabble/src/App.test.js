@@ -7,6 +7,8 @@ import configureMockStore from "redux-mock-store";
 import { middlewares } from "./store";
 import ReduxProvider from "./utils/reduxWrapper";
 
+// https://stackoverflow.com/questions/48846289/why-is-my-react-component-is-rendering-twice#:~:text=React%20is%20rendering%20the%20component,and%20triggers%20the%20async%20operation.
+
 const mockStore = configureMockStore([...middlewares]);
 
 const defaultProps = {};
@@ -42,13 +44,30 @@ const setup = (props = {}) => {
       <App {...setupProps} />
     </ReduxProvider>
   );
+
   return wrapper;
 };
 
 describe("App Component", () => {
-  test("renders container without error", () => {
+  test("renders app container without error", () => {
     const wrapper = setup();
     const component = findByTestAttr(wrapper, "test-app");
     expect(component.length).toBe(1);
+  });
+  test("renders score without error", () => {
+    const wrapper = setup();
+    const component = findByTestAttr(wrapper, "test-score");
+    expect(component.length).toBe(1);
+  });
+  //As thunk middleware calls on the action creators, the render will be thrice with initial, loading and final.
+  test("renders input without error", () => {
+    const wrapper = setup();
+    const component = findByTestAttr(wrapper, "test-input");
+    expect(component.length).toBe(3);
+  });
+  test("do not render table without error", () => {
+    const wrapper = setup();
+    const component = findByTestAttr(wrapper, "test-table");
+    expect(component.length).toBe(0);
   });
 });
