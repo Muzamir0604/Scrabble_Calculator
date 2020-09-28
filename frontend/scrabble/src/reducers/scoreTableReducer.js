@@ -16,6 +16,7 @@ const scoreTableReducer = (state = initialState, action) => {
       return {
         ...state,
         list: action.payload,
+        isLoading: false,
       };
     case FETCH_SCORE_TABLE_REQUEST:
       return {

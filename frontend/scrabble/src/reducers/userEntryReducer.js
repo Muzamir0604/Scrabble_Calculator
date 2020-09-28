@@ -22,6 +22,7 @@ const userEntryReducer = (state = initialState, action) => {
       return {
         ...state,
         list: action.payload,
+        isLoading: false,
       };
     case FETCH_USER_ENTRY_LIST_REQUEST:
       return {
@@ -40,6 +41,7 @@ const userEntryReducer = (state = initialState, action) => {
         name: action.payload.name,
         word: action.payload.word,
         score: action.payload.score,
+        isLoading: false,
       };
     case POST_USER_ENTRY_REQUEST:
       return {
