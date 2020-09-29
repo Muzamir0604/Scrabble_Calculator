@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   FormControl,
@@ -71,9 +71,9 @@ const useStyles = makeStyles((theme) => ({
       height: "2em",
     },
     [theme.breakpoints.up("md")]: {
-      margin: "1em 10em",
+      margin: "0.5em 10em",
       justify: "center",
-      height: "2em",
+      height: "2.5em",
     },
   },
   resize: {
@@ -110,7 +110,6 @@ function InputForm(props) {
   const [isEmpty, setIsEmpty] = useState(false);
   const classes = useStyles();
 
-  // useEffect(() => {}, [isSubmit, isEmpty]);
   let name = "muzamir";
   return (
     <React.Fragment>
@@ -174,16 +173,18 @@ function InputForm(props) {
                     className={classes.textField}
                   />
                 </FormControl>
-                {props.touched.word && props.errors.word ? (
-                  <FormHelperText
-                    id="component-error-text"
-                    style={{ color: "red" }}
-                    className={classes.textField}
-                  >
-                    {props.errors.word}
-                  </FormHelperText>
-                ) : null}
+                <div className={classes.alert}>
+                  {props.touched.word && props.errors.word ? (
+                    <FormHelperText
+                      id="component-error-text"
+                      style={{ color: "red" }}
+                    >
+                      {props.errors.word}
+                    </FormHelperText>
+                  ) : null}
+                </div>
               </FormGroup>
+
               <Button
                 data-test="button-submit"
                 color="primary"
