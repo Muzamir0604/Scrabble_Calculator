@@ -3,7 +3,6 @@ import { Box, Typography, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import capitalize from "../utils/textTransformer";
 import dictTransformer from "../utils/dictTransformer";
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   box: {
@@ -54,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Tile(props) {
   const classes = useStyles();
-  // const scoreList = useSelector((state) => state.scoreTableReducer.list);
   const scoreList = props.scoreList;
   var dict = dictTransformer(scoreList);
 
