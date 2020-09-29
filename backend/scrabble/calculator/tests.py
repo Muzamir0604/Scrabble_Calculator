@@ -85,6 +85,24 @@ class ApiTests(APITestCase):
         response = self.client.post(url, payload)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_create_userentry_number(self):
+        url = UserEntryListUrl
+        payload = {
+            "name": "muzamir",
+            "word": 2,
+        }
+        response = self.client.post(url, payload)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_create_useretnry_empty(self):
+        url = UserEntryListUrl
+        payload = {
+            "name": "muzamir",
+            "word": "",
+        }
+        response = self.client.post(url, payload)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
     def test_filter_name_userentry(self):
         url = UserEntryListUrl + "?name=muzamir"
         response = self.client.get(url)
@@ -102,3 +120,11 @@ class ServiceLogicTests(TestCase):
     def test_calculate_score(self):
         res = Service.calculate_Score(self, "muzamir", "back")
         self.assertEqual(res.get("score"), 27)
+
+    def test_calculate_no_word_score(self):
+        res = Service.calculate_Score(self, "muzamir", "")
+        self.assertEqual(res.get("score"), 0)
+
+    def test_calculate_number_word_score(self):
+        res = Service.calculate_Score(self, "muzamir", 123)
+        self.assertEqual(res.get("score"), 0)

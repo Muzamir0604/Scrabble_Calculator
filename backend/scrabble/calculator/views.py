@@ -22,14 +22,23 @@ class UserEntryViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         name = request.data['name']
         word = request.data['word']
-        data = Service.calculate_Score(self, name,  word)
+        data = {}
+        if word:
+            data = Service.calculate_Score(self, name,  word)
 
-        UserEntry.objects.create(**data)
-        response = {'message': 'Entry Created',
-                    'name': request.data['name'],
-                    'word': request.data['word'],
-                    'score': data['score']}
-        return Response(response, status=status.HTTP_200_OK)
+            UserEntry.objects.create(**data)
+            response = {'message': 'Entry Created',
+                        'name': request.data['name'],
+                        'word': request.data['word'],
+                        'score': data['score']}
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            data['score'] = 0
+            response = {'message': 'No letters found',
+                        'name': request.data['name'],
+                        'word': request.data['word'],
+                        'score': data['score']}
+            return Response(response, status=status.HTTP_404_NOT_FOUND)
 
     def update(self, request, *args, **kwargs):
         response = {'message': 'you can\'t update like that'}
